@@ -1,0 +1,8 @@
+.media-item {
+  text-align: center;
+  padding: 10px;
+}
+
+.media-item > img {
+  border: 2px solid black;
+}
