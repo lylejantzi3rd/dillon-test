@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as mediaActions from '../actions/media-actions';
+import * as thumbnailActions from '../actions/thumbnail-actions';
 import MediaItem from './MediaItem';
+import ImageSizeSlider from './ImageSizeSlider';
 import './MediaItemList.css';
 
 class MediaItemList extends Component {
@@ -11,7 +13,8 @@ class MediaItemList extends Component {
     super(props);
 
     this.state = {
-      media: []
+      media: [],
+      thumbnail: {}
     };
   }
 
@@ -21,8 +24,9 @@ class MediaItemList extends Component {
     return (
       <div className="media-container">
         {media.map((mediaItem) => 
-          <MediaItem key={mediaItem.titleId} mediaItem={mediaItem} />  
+          <MediaItem key={mediaItem.titleId} mediaItem={mediaItem} thumbnail={this.props.thumbnail} />  
         )}
+				<ImageSizeSlider setThumbnailWidth={this.props.actions.setThumbnailWidth} value={this.props.thumbnail.width}/>
       </div>
     );
   }
@@ -35,13 +39,14 @@ MediaItemList.propTypes = {
 
 function mapStateToProps(state, props) {
   return {
-    media: state.media
+    media: state.media,
+    thumbnail: state.thumbnail
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(mediaActions, dispatch)
+    actions: bindActionCreators({...mediaActions, ...thumbnailActions}, dispatch)
   }
 }
 

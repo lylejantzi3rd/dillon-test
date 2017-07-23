@@ -1,0 +1,12 @@
+.image-resize-slider {
+  width: 200px;
+  margin-right: 10px;
+  float: right;
+}
+
+.bottom-bar {
+  background-color: lightgrey;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+} 
